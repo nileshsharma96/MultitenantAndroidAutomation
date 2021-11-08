@@ -1,4 +1,4 @@
-package student;
+package Student;
 
 import java.util.concurrent.TimeUnit;
 
@@ -23,6 +23,7 @@ public class Regression extends Pilot {
 //		test.log(Status.INFO, "Phase One Started");
 
 		// Check for institute code
+		driver.findElementByXPath("//" + EnvConfig.view + "[@text='lil@home']").click();
 		if (driver.findElements(By.xpath("//android.widget.EditText[@text='Enter school code']")).size() > 0) {
 			driver.findElementByXPath("//android.widget.EditText[@text='Enter school code']").sendKeys("demodemo");
 			driver.findElementByXPath("//" + EnvConfig.button + "[@text='Proceed']").click();
@@ -48,9 +49,13 @@ public class Regression extends Pilot {
 		driver.findElementByXPath("//" + EnvConfig.button + "[@text='GET STARTED']").click();
 
 		// Enabled Mobile Permissions
-		driver.findElementByXPath("//" + EnvConfig.button + "[@text='WHILE USING THE APP']").click();
-		driver.findElementByXPath("//" + EnvConfig.button + "[@text='ALLOW']").click();
-		driver.findElementByXPath("//" + EnvConfig.button + "[@text='ALLOW']").click();
+		if (driver.findElements(By.xpath("//" + EnvConfig.button + "[@text='WHILE USING THE APP']")).size() > 0) {
+			driver.findElementByXPath("//" + EnvConfig.button + "[@text='WHILE USING THE APP']").click();
+			driver.findElementByXPath("//" + EnvConfig.button + "[@text='ALLOW']").click();
+			driver.findElementByXPath("//" + EnvConfig.button + "[@text='ALLOW']").click();
+		} else {
+			System.out.println("Device Permissions--Already Given!!");
+		}
 
 		// Start Login for Student
 		if (driver.findElements(By.xpath("//" + EnvConfig.button + "[@resource-id='" + EnvConfig.baseAppPackage
